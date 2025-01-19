@@ -1,0 +1,123 @@
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0px 4px 16px 0px #eaebed;
+}
+
+.cart-product-details {
+  display: flex;
+  gap: 8px;
+  width: 90%;
+  max-width: 200px;
+}
+
+.cart-quantity-price-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.cart-product-image {
+  width: 96px;
+  height: 96px;
+  border-radius: 4px;
+}
+.cart-product-title-brand-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.cart-product-title {
+  color: #171f46;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.cart-product-brand {
+  color: #64748b;
+  font-family: 'Roboto';
+  font-size: 14px;
+  margin: 0;
+}
+
+.cart-quantity-container {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controller-button {
+  padding: 0;
+  margin: 2px 0 0 0;
+}
+
+.cart-quantity {
+  color: #52606d;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.3;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.cart-total-price {
+  color: #0b69ff;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.delete-button {
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  border: none;
+}
+.cart-product-desc {
+  display: none;
+  margin: 12px 0 0 0;
+  padding: 0;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) {
+  .cart-item {
+    margin-bottom: 32px;
+    padding-left: 36px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-right: 48px;
+  }
+  .cart-product-image {
+    width: 120px;
+    height: 120px;
+  }
+  .cart-product-details {
+    max-width: 360px;
+  }
+  .cart-product-title {
+    font-size: 20px;
+  }
+  .cart-product-brand {
+    font-size: 17px;
+  }
+  .cart-quantity-price-container {
+    gap: 24px;
+  }
+  .cart-product-desc {
+    display: block;
+  }
+}

@@ -1,0 +1,27 @@
+.cart-summary {
+  color: #616e7c;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cs-heading {
+  font-size: 20px;
+  margin: 0;
+}
+.cs-total-amount {
+  color: #000000;
+  margin: 0;
+}
+.cs-count {
+  margin: 0;
+}
+.cs-checkout-btn {
+  background-color: #0b69ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Roboto';
+  padding: 6px;
+  margin-top: 2px;
+}
