@@ -14,6 +14,7 @@ class PaymentPopup extends Component {
     expiryDate: '',
     upiId: '',
     errorMessage: '',
+    isPaymentDone: false,
   }
 
   handlePaymentChange = event => {
@@ -105,7 +106,6 @@ class PaymentPopup extends Component {
 
   handlePlaceOrder = () => {
     const {selectedPaymentMethod, address} = this.state
-    const {onPlaceOrder} = this.props
 
     // Check if the address is filled
     if (!address.trim()) {
@@ -133,7 +133,17 @@ class PaymentPopup extends Component {
       }
     }
 
-    onPlaceOrder() // Call parent method to reset the cart
+    this.setState({
+      selectedPaymentMethod: 'COD',
+      address: '',
+      phone: '',
+      cardNumber: '',
+      cvv: '',
+      expiryDate: '',
+      upiId: '',
+      errorMessage: '',
+      isPaymentDone: true,
+    })
   }
 
   renderForm = () => {
@@ -219,8 +229,70 @@ class PaymentPopup extends Component {
     )
   }
 
-  render() {
+  renderPaymentView = () => {
     const {selectedPaymentMethod} = this.state
+    return (
+      <>
+        <h2>Choose Payment Method</h2>
+        <div className="payment-options">
+          <label>
+            <input
+              type="radio"
+              value="COD"
+              checked={selectedPaymentMethod === 'COD'}
+              onChange={this.handlePaymentChange}
+            />
+            Cash on Delivery
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="CARD"
+              checked={selectedPaymentMethod === 'CARD'}
+              onChange={this.handlePaymentChange}
+            />
+            Card Payment
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="UPI"
+              checked={selectedPaymentMethod === 'UPI'}
+              onChange={this.handlePaymentChange}
+            />
+            UPI
+          </label>
+        </div>
+        {this.renderForm()}
+      </>
+    )
+  }
+
+  renderThankYouView = close => {
+    const {onPlaceOrder} = this.props
+
+    const onContinueShopping = () => {
+      close()
+      this.setState({isPaymentDone: false})
+      onPlaceOrder() // Call parent method to reset the cart
+    }
+
+    return (
+      <>
+        <p className="cart-thank-you-text">Thank You for shopping with us!!!</p>
+        <button
+          type="button"
+          className="shop-now-button"
+          onClick={onContinueShopping}
+        >
+          Continue Shopping...
+        </button>
+      </>
+    )
+  }
+
+  render() {
+    const {isPaymentDone} = this.state
 
     return (
       <Popup
@@ -230,7 +302,6 @@ class PaymentPopup extends Component {
           </button>
         }
         modal
-        closeOnDocumentClick
         position="center center"
       >
         {close => (
@@ -239,37 +310,9 @@ class PaymentPopup extends Component {
               <button type="button" className="close-btn" onClick={close}>
                 <IoMdCloseCircleOutline className="close-icon" />
               </button>
-              <h2>Choose Payment Method</h2>
-              <div className="payment-options">
-                <label>
-                  <input
-                    type="radio"
-                    value="COD"
-                    checked={selectedPaymentMethod === 'COD'}
-                    onChange={this.handlePaymentChange}
-                  />
-                  Cash on Delivery
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="CARD"
-                    checked={selectedPaymentMethod === 'CARD'}
-                    onChange={this.handlePaymentChange}
-                  />
-                  Card Payment
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="UPI"
-                    checked={selectedPaymentMethod === 'UPI'}
-                    onChange={this.handlePaymentChange}
-                  />
-                  UPI
-                </label>
-              </div>
-              {this.renderForm()}
+              {isPaymentDone
+                ? this.renderThankYouView(close)
+                : this.renderPaymentView()}
             </div>
           </div>
         )}
